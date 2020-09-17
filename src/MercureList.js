@@ -1,7 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
-
+/*
+* Simple proof of concept to connect to mercure.
+* Note that useRef has to be used in order to access the state within a callback.
+* */
 function MercureList() {
-    const [mercureMessages, setMercureMessages] = useState(["init","init2"]);
+    const [mercureMessages, setMercureMessages] = useState([]);
     const messagesRef = useRef(mercureMessages);
     const setMessages = data => {
         messagesRef.current = data;
@@ -25,13 +28,11 @@ function MercureList() {
         color: 'blue',
         width: '100%'
     };
-    // console.log(mercureMessages);
     return (
         <div>
             <h1>Mercure updates</h1>
-            { mercureMessages.map((msg) => {
-                // alert(msg);
-                return <div style={divStyle} key={Math.random()}>{msg}</div>
+            { mercureMessages.map((msg,index) => {
+                return <div style={divStyle} key={index}>{msg}</div>
             })}
         </div>
     );
