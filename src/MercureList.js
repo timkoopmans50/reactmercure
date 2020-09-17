@@ -1,15 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 function MercureList() {
-    const [mercureMessages, setMercureMessages] = useState([["init","init2"]]);
+    const [mercureMessages, setMercureMessages] = useState(["init","init2"]);
+    const messagesRef = useRef(mercureMessages);
+    const setMessages = data => {
+        messagesRef.current = data;
+        setMercureMessages(data);
+    };
     useEffect(() => {
         const updateMercureMessages = message => {
             console.log('update');
             const msg = JSON.parse(message.data);
             const val = msg.settingKey + '=>' + msg.settingValue;
-            let newMessages = mercureMessages;
-            newMessages.push(val);
-            setMercureMessages([newMessages]);
+            setMessages([...messagesRef.current,val]);
         }
 
         const url = new URL('http://sulu.test:9090/.well-known/mercure');
