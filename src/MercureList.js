@@ -25,7 +25,7 @@ function MercureList() {
         color: 'blue',
         width: '100%'
     };
-    console.log(mercureMessages);
+    // console.log(mercureMessages);
     return (
         <div>
             <h1>Mercure updates</h1>
